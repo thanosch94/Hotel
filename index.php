@@ -14,17 +14,45 @@
         <nav class="d-flex justify-content-around pt-4 bg-light">
             <p>Hotels</p>
      
-            <div class="">
+            <div>
                 <i class="fa-solid fa-house"></i>
                 <p class="d-inline">Home</p>
             </div>
         </nav>
     </header>
     <main>
-        <img class="img-fluid" src="images/main.jpg">
+        <section class="z-1 position-absolute">
+            <img class="img-fluid w-100 h-auto" src="images/main.jpg" >
+        </section>
+        <section class="container rounded-3 col-5 bg-light z-2 pt-5 pb-4 position-absolute top-50 start-50 translate-middle">
+            <form>
+                <div class="container justify-content-center row mb-5">
+                    <input 
+                        class="col-5 rounded ms-2 me-2 pt-2 pb-2 text-center";
+                        type="text";
+                        placeholder="City"/>
+                    <input 
+                        class="col-5 rounded pt-2 pb-2 text-center";
+                        type="text";
+                        placeholder="Room Type"/>
+                </div>
+                <div class="container  justify-content-center row">
+                    <input 
+                        class="col-5 rounded ms-2 me-2 pt-2 pb-2 text-center";
+                        type="date"/>
+                    <input 
+                        class="col-5 rounded pt-2 pb-2 text-center";
+                        type="date"/>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="d-inline mt-5 mb-2 ps-4 pe-4 btn btn-success"><i class="fa fa-search me-2" aria-hidden="true"></i>Search</button>
+                </div>
+
+            </form>
+        </section>
     </main>
-    <footer>
-        <p class="text-center p-3 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
+    <footer class="z-3 position-absolute w-100 bottom-0 pt-5 pb-5 top-100 mt-5">
+        <p class="text-center p-4 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
     </footer>
 </body>
 </html>
