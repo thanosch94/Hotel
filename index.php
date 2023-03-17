@@ -24,11 +24,11 @@
         <section class="z-1 position-absolute">
             <img class="img-fluid w-100 h-auto" src="images/main.jpg" >
         </section>
-        <section class="container rounded-3 col-5 bg-light z-2 pt-5 pb-4 position-absolute top-50 start-50 translate-middle">
+        <section class="container rounded-3 col-4 bg-light z-2 pt-5 pb-4 position-absolute top-50 start-50 translate-middle">
             <form>
                 <div class="container justify-content-center row mb-5">
                     <input 
-                        class="col-5 rounded ms-2 me-2 pt-2 pb-2 text-center";
+                        class="col-5 rounded ms-4 me-2 pt-2 pb-2 text-center";
                         type="text";
                         placeholder="City"/>
                     <input 
@@ -38,7 +38,7 @@
                 </div>
                 <div class="container  justify-content-center row">
                     <input 
-                        class="col-5 rounded ms-2 me-2 pt-2 pb-2 text-center";
+                        class="col-5 rounded ms-4 me-2 pt-2 pb-2 text-center";
                         type="date"/>
                     <input 
                         class="col-5 rounded pt-2 pb-2 text-center";
