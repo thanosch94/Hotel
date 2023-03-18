@@ -15,32 +15,35 @@
             <p>Hotels</p>
      
             <div>
-                <i class="fa-solid fa-house"></i>
+            <i class="fa-solid fa-house"></i>
                 <p class="d-inline">Home</p>
             </div>
         </nav>
     </header>
     <main>
-        <h2 class="text-center mt-4">Login</h2>
-        <section class="container rounded-3 col-4 bg-light pt-5 pb-4 position-absolute top-50 start-50 translate-middle">
+
+        <section class="col-3 position-absolute top-50 start-50 translate-middle shadow-lg bg-white rounded">
+            <h3 class="text-center p-4 bg-success text-light">Login</h3>
             <form>
-                <div class="container justify-content-center row mb-4">
-                    <h4 class="text-center mb-3">Username</h4>
+                <div class="justify-content-center row mb-4">
+                    <h5 class="text-center mb-3">Username</h5>
                     <input 
-                        class="col-8 rounded ms-4 me-2 pt-1 pb-1 text-center";
-                        id="username"
-                        type="text"/>
+                        class="col-8 rounded pt-1 pb-1 text-center";
+                        type="text";
+                        placeholder="Email";
+                        required/>
 
                 </div>
-                <div class="container  justify-content-center row">
-                    <h4 class="text-center mb-3">Password</h4>
+                <div class="justify-content-center row mb-4">
+                    <h5 class="text-center mb-3">Password</h5>
                     <input 
                             class="col-8 rounded pt-1 pb-1 text-center";
-                            id="password"
-                            type="password"/>
+                            type="password";
+                            placeholder="Password";
+                            required/>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="d-inline mt-3 mb-2 ps-4 pe-4 btn btn-success">Login</button>
+                    <button type="submit" class="col-6  justify-content-center mb-2 btn btn-success">Login</button>
                 </div>
                 <p class="text-center mt-4">Forgot your password? | Create account</p>
 
