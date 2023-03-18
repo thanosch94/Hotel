@@ -10,16 +10,7 @@
     <script src="https://kit.fontawesome.com/022912981f.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
-        <nav class="d-flex justify-content-around pt-4 bg-light">
-            <p>Hotels</p>
-     
-            <div>
-            <i class="fa-solid fa-house"></i>
-                <p class="d-inline">Home</p>
-            </div>
-        </nav>
-    </header>
+    <?php include('header.php'); ?>
     <main>
 
         <section class="col-3 position-absolute top-50 start-50 translate-middle shadow-lg bg-white rounded">
