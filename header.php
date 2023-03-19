@@ -1,5 +1,5 @@
 <header>
-        <nav class="d-flex justify-content-around pt-4 bg-light">
+        <nav class="d-flex justify-content-around pt-4 bg-light shadow">
             <p>Hotels</p>
      
             <div>
