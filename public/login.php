@@ -14,7 +14,7 @@
     <main>
 
         <section class="col-3 position-absolute top-50 start-50 translate-middle shadow-lg bg-white rounded">
-            <h3 class="text-center p-4 bg-success text-light">Login</h3>
+            <h3 class="text-center p-4 bg-secondary text-light">Login</h3>
             <form>
                 <div class="justify-content-center row mb-4">
                     <h5 class="text-center mb-3">Username</h5>
@@ -34,7 +34,7 @@
                             required/>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="col-6  justify-content-center mb-2 btn btn-success">Login</button>
+                    <button type="submit" class="col-6  justify-content-center mb-2 btn btn-secondary">Login</button>
                 </div>
                 <p class="text-center mt-4">Forgot your password? | Create account</p>
 

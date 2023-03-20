@@ -36,7 +36,7 @@
                         type="date"/>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="d-inline mt-5 mb-2 ps-4 pe-4 btn btn-success"><i class="fa fa-search me-2" aria-hidden="true"></i>Search</button>
+                    <button type="submit" class="d-inline mt-5 mb-2 ps-4 pe-4 btn btn-secondary"><i class="fa fa-search me-2" aria-hidden="true"></i>Search</button>
                 </div>
 
             </form>
