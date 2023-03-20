@@ -1,3 +1,12 @@
+<?php
+require_once __DIR__.'\..\boot\boot.php';
+
+use Hotel\Roomlist;
+$list = new Roomlist();
+$roomlist = $list->getList();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,7 +64,7 @@
         </aside>
         <section class="col-8 mt-4 ms-5">
             <h4 class="bg-secondary p-2 text-light rounded">Search Results</h4>
-
+            <?php print_r($roomlist);?>
         </section>
     </main>
     <footer class="position-absolute w-100 bottom-0 pt-5 pb-5 top-100">
