@@ -20,51 +20,71 @@ $roomlist = $list->getList();
 </head>
 <body>
     <?php include('header.php'); ?>
-    <main class="row mt-4">
-        <aside class="col-3 container shadow mt-4 ms-5 rounded-3">
-            <div class="text-center p-4">
-                <h4>FIND THE PERFECT HOTEL</h4>
-            </div>
-            <form class="container">
-            <select class="w-100 rounded p-2 mb-4 text-center" id="guests">
-                    <option value="" disabled selected>Count of guests</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-                <select class="w-100 rounded p-2 mb-4 text-center" id="room_type">
-                    <option value="" disabled selected>Room Type</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-                <select class="w-100 rounded p-2 mb-4 text-center" id="city">
-                    <option value="" disabled selected>City</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-                <div class="row justify-content-around mb-2">
-                    <input type="number" name="min_price" class="w-25 me-5">
-                    <input type="number" name="max_price" class="w-25 ms-1">
-                    <input type="range" class="mt-2 w-100">
-
-                    <label for="min_price" class="small w-25">Min price</label>
-                    <label for="max_price" class="small w-25">Max price</label>
+    <main class="row mt-4 col-12">
+        <aside class="col-3  mt-4 ms-5">
+            <section class="container shadow rounded-3">
+                <div class="text-center p-4">
+                    <h4>FIND THE PERFECT HOTEL</h4>
                 </div>
-                <input 
-                    class="w-100 rounded p-2 mb-4 text-center text-center";
-                    type="date"/>
-                <input 
-                    class="w-100 rounded p-2 mb-4 text-center text-center";
-                    type="date"/>
-                <button type="submit" class="btn bg-secondary w-100 text-light mb-4">FIND HOTELS</submit>
-            </form>
+                <form class="container">
+                <select class="w-100 rounded p-2 mb-4 text-center" id="guests">
+                        <option value="" disabled selected>Count of guests</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <select class="w-100 rounded p-2 mb-4 text-center" id="room_type">
+                        <option value="" disabled selected>Room Type</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <select class="w-100 rounded p-2 mb-4 text-center" id="city">
+                        <option value="" disabled selected>City</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <div class="row justify-content-around mb-2">
+                        <input type="number" name="min_price" class="w-25 me-5">
+                        <input type="number" name="max_price" class="w-25 ms-1">
+                        <input type="range" class="mt-2 w-100">
 
+                        <label for="min_price" class="small w-25">Min price</label>
+                        <label for="max_price" class="small w-25">Max price</label>
+                    </div>
+                    <input 
+                        class="w-100 rounded p-2 mb-4 text-center text-center";
+                        type="date"/>
+                    <input 
+                        class="w-100 rounded p-2 mb-4 text-center text-center";
+                        type="date"/>
+                    <button type="submit" class="btn bg-secondary w-100 text-light mb-4">FIND HOTELS</submit>
+                </form>
+            </section>
         </aside>
-        <section class="col-8 mt-4 ms-5">
-            <h4 class="bg-secondary p-2 text-light rounded">Search Results</h4>
-            <?php print_r($roomlist);?>
+        <section class="col-8 mt-4">
+            <h3 class="bg-secondary p-2 text-light rounded">Search Results</h3>
+            <div class="row">
+                <?php foreach($roomlist as $room){ ?>
+                <div class="col-3 mb-5">
+                    <img style="border-right:3px solid black; padding:10px" src="images/rooms/<?php echo $room['photo_url'] ?>" width="220px" alt="room-1">
+                </div>
+                <div class="col-9">
+                    <h4><?php echo $room['name'];?><h4>
+                    <h5 class="text-secondary"><?php echo $room['city'].', '.$room['address'].'</h5>';?>
+                    <p><?php echo $room['description_short']?>
+                </div>
+                <div class="col-12 row">
+                    <p class="col-2 ms-4 btn bg-secondary text-light">Per night: <?php echo $room['price'] ?>€</p>
+                    <div class="row col-9 ms-4 text-center">
+                        <p class="col-5 bg-light text-secondary p-2">Count of guests: <?php echo $room['count_of_guests']?></p>
+                        <p class="col-1 bg-light text-secondary p-2">|</p>
+                        <p class="col-6 bg-light text-secondary p-2">Type of room: <?php echo $room['type_id']?></p>
+                </div>
+                </div>
+                <?php } ?>
+            </div>
         </section>
     </main>
     <footer class="position-absolute w-100 bottom-0 pt-5 pb-5 top-100">
