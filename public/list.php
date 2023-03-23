@@ -74,14 +74,21 @@ $roomlist = $list->getList();
                     <h4><?php echo $room['name'];?><h4>
                     <h5 class="text-secondary"><?php echo $room['city'].', '.$room['address'].'</h5>';?>
                     <p><?php echo $room['description_short']?>
+                    <div class="row">
+                        <span class="col-8"></span>
+                        <button class=" btn col-3 align-items-end btn-secondary">Go to Room Page</button>
+                    </div>
                 </div>
+                
+
                 <div class="col-12 row">
+                    
                     <p class="col-2 ms-4 btn bg-secondary text-light">Per night: <?php echo $room['price'] ?>€</p>
                     <div class="row col-9 ms-4 text-center">
                         <p class="col-5 bg-light text-secondary p-2">Count of guests: <?php echo $room['count_of_guests']?></p>
                         <p class="col-1 bg-light text-secondary p-2">|</p>
                         <p class="col-6 bg-light text-secondary p-2">Type of room: <?php echo $room['type_id']?></p>
-                </div>
+                    </div>
                 </div>
                 <?php } ?>
             </div>
