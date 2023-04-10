@@ -21,7 +21,7 @@
                             <div class="row g-0">
                                 <div class="p-5">
                                     <h3 class="fw-normal text-center mb-5">Registration</h3>
-                                    <form action="register_success.php" method="post">
+                                    <form action="actions/register.php" method="post">
                                         <div>
                                             <div class="mb-4 pb-2">
                                                 <div class="form-outline">
