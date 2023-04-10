@@ -12,34 +12,35 @@
 <body>
     <?php include('header.php'); ?>
     <main>
+    <section class="vh-100" style="  background: linear-gradient(to right, rgb(188, 201, 222), rgb(223, 233, 238));">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
 
-        <section class="col-3 position-absolute top-50 start-50 translate-middle shadow-lg bg-white rounded">
-            <h3 class="text-center p-4 bg-secondary text-light">Login</h3>
+            <h3 class="mb-5">Sign in</h3>
             <form>
-                <div class="justify-content-center row mb-4">
-                    <h5 class="text-center mb-3">Username</h5>
-                    <input 
-                        class="col-8 rounded pt-1 pb-1 text-center";
-                        type="text";
-                        placeholder="Email";
-                        required/>
+                <div class="form-outline mb-4">
+                <input type="email" id="email" class="form-control form-control-lg" />
+                <label class="form-label" for="email">Email</label>
+                </div>
 
+                <div class="form-outline mb-4">
+                <input type="password" id="password" class="form-control form-control-lg" />
+                <label class="form-label" for="password">Password</label>
                 </div>
-                <div class="justify-content-center row mb-4">
-                    <h5 class="text-center mb-3">Password</h5>
-                    <input 
-                            class="col-8 rounded pt-1 pb-1 text-center";
-                            type="password";
-                            placeholder="Password";
-                            required/>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="col-6  justify-content-center mb-2 btn btn-secondary">Login</button>
-                </div>
-                <p class="text-center mt-4">Forgot your password? | Create account</p>
+                <p class="text-center mb-3 mt-4">Forgot your password? | <a href="register.php">Create account</a></p>
 
+                <button class="btn btn-secondary text-light btn-lg btn-block" type="submit">Login</button>
             </form>
-        </section>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
     <footer class="position-absolute w-100 bottom-0 pt-5 pb-5 top-100">
         <p class="text-center p-4 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
