@@ -17,7 +17,7 @@ class User{
     protected function getPdo() {
         return $this->pdo;
     }
-    public function getByEmail(){
+    public function getByEmail($email){
         $statement = $this->getPdo()->prepare('SELECT * FROM user WHERE email=:email');
         $statement ->bindParam(':email', $email, PDO::PARAM_STR);
         $statement->execute();
@@ -45,7 +45,7 @@ class User{
     }
 
     public function verify($email, $password){
-        $user = this-> getByEmail($email);
+        $user = $this-> getByEmail($email);
 
         return password_verify($password, $user['password']);
     }
