@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
+    
+    <link rel="stylesheet" href="assets/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/022912981f.js" crossorigin="anonymous"></script>
@@ -12,8 +14,8 @@
 <body>
     <?php include('header.php'); ?>
     <main>
-        <section class="z-1 position-absolute">
-            <img class="img-fluid w-100 h-auto" src="images/main.jpg" >
+        <section class="z-1 position-relative">
+            <img class="img-fluid h-auto" src="images/main.jpg" width="100%" >
         </section>
         <section class="container rounded-3 col-4 bg-light z-2 pt-5 pb-4 position-absolute top-50 start-50 translate-middle">
             <form>
@@ -42,8 +44,8 @@
             </form>
         </section>
     </main>
-    <footer class="z-3 position-absolute w-100 bottom-0 pt-5 pb-5 top-100 mt-5">
-        <p class="text-center p-4 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
+    <footer class="z-3">
+        <p class="text-center m-0 p-4 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
     </footer>
 </body>
 </html>

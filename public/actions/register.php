@@ -20,7 +20,7 @@ $userInfo = $user->getByEmail($_REQUEST['email']);
 $token =$user->generateToken($userInfo['user_id']);
 
 //Set cookie
-setcookie('user_token', $token, time()+(30*24*60*60), '/');
+setcookie('user_id', $token, time()+(30*24*60*60), '/');
 
 
 ?>
@@ -63,8 +63,8 @@ setcookie('user_token', $token, time()+(30*24*60*60), '/');
             </div>
         </div>
     </section>
-    <footer class="position-absolute w-100 bottom-0 pt-5 pb-5 top-100">
-        <p class="text-center p-4 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
+    <footer>
+        <p class="text-center m-0 p-4 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
     </footer>
 </body>
 </html>
