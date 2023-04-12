@@ -5,7 +5,13 @@ spl_autoload_register(function ($class) {
     require_once sprintf(__DIR__.'/../app/%s.php', $class);
 });
 
+use Hotel\User;
+
+$user= new User();
+
 $userToken = $_COOKIE['user_id'];
+
+
 if($userToken){
     //Verify user
     if($user->verifyToken($userToken)){
