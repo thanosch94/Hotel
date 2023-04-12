@@ -40,3 +40,17 @@
     border-bottom-right-radius: 15px;
   }
 }
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.footer {
+  padding: 20px;
+  margin-top: auto;
+}
+#map {
+  height: 400px;
+  width: 100%;
+}
