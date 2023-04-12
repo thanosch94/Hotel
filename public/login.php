@@ -1,3 +1,13 @@
+<?php
+require_once __DIR__.'\..\boot\boot.php';
+use Hotel\User;
+
+if(!empty(User::getCurrentUserId())){
+
+    header('Location: /hotel/public/index.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
