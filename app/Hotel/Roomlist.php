@@ -17,4 +17,9 @@ class Roomlist{
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getRoom($roomId){
+        $statement = $this->getPdo()->prepare('SELECT * FROM room WHERE room_id = ?');
+        $statement->execute([$roomId]);
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
 }
