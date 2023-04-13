@@ -20,6 +20,50 @@ class Roomlist{
     public function getRoom($roomId){
         $statement = $this->getPdo()->prepare('SELECT * FROM room WHERE room_id = ?');
         $statement->execute([$roomId]);
+        $roomId=[];
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
+
+    //Find, sort and keep the first room based on the count_of_guests DESC
+    public function getmaxNumberofGuests(){
+        $statement = $this->getPdo()->prepare('SELECT * FROM room ORDER BY count_of_guests DESC');
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getroomTypes(){
+        $statement = $this->getPdo()->prepare('SELECT * FROM room_type');
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getCities(){
+        $statement = $this->getPdo()->prepare('SELECT DISTINCT city FROM room');
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+    public function getMinPrice(){
+        $statement = $this->getPdo()->prepare('SELECT * FROM room ORDER BY price ASC');
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getMaxPrice(){
+        $statement = $this->getPdo()->prepare('SELECT * FROM room ORDER BY price DESC');
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+    public function getListwithFilters(){
+        $city = $_GET['city'];
+        $roomtype = $_GET['roomtype'];
+        $checkin = $_GET['checkin'];
+        $checkout = $_GET['checkout'];
+
+        $statement = $this->getPdo()->prepare('SELECT * FROM room WHERE city = COALESCE(:city, city) AND type_id = COALESCE(:roomtype, type_id)');
+        $statement->bindParam(':city', $city, PDO::PARAM_STR);
+        $statement->bindParam(':roomtype', $roomtype, PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

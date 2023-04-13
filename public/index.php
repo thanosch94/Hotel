@@ -1,3 +1,11 @@
+<?php
+require_once __DIR__.'\..\boot\boot.php';
+
+use Hotel\Roomlist;
+$list = new Roomlist();
+$roomtypes = $list -> getroomTypes();
+$cities = $list -> getCities();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,24 +26,31 @@
             <img class="img-fluid h-auto" src="images/main.jpg" width="100%" >
         </section>
         <section class="container rounded-3 col-4 bg-light z-2 pt-5 pb-4 position-absolute top-50 start-50 translate-middle">
-            <form>
+            <form action="list.php" method="get">
                 <div class="container justify-content-center row mb-5">
-                    <input 
-                        class="col-5 rounded ms-4 me-2 pt-2 pb-2 text-center";
-                        type="text";
-                        placeholder="City"/>
-                    <input 
-                        class="col-5 rounded pt-2 pb-2 text-center";
-                        type="text";
-                        placeholder="Room Type"/>
+                    
+                <select class="col-5 rounded ms-4 me-2 pt-2 pb-2 text-center" name="city" id="city">
+                        <option value="" disabled selected>City</option>
+                        <?php foreach($cities as $city){
+                        echo'<option value='. $city['city'] . '>'. $city['city'] . '</option>';}
+                        ?>
+                </select>
+                <select class="col-5 rounded pt-2 pb-2 text-center" name="roomtype" id="room_type">
+                    <option value="" disabled selected>Room Type</option>
+                    <?php foreach($roomtypes as $roomtype){
+                    echo'<option value='. $roomtype['type_id'] . '>'. $roomtype['title'] . '</option>';}
+                    ?>
+                </select>
                 </div>
                 <div class="container  justify-content-center row">
                     <input 
                         class="col-5 rounded ms-4 me-2 pt-2 pb-2 text-center";
-                        type="date"/>
+                        name="checkin"
+                        type="date" min="<?= date('Y-m-d'); ?>"/>
                     <input 
                         class="col-5 rounded pt-2 pb-2 text-center";
-                        type="date"/>
+                        name="checkout";
+                        type="date" min="<?= date('Y-m-d'); ?>"/>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="d-inline mt-5 mb-2 ps-4 pe-4 btn btn-secondary"><i class="fa fa-search me-2" aria-hidden="true"></i>Search</button>
