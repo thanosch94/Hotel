@@ -3,7 +3,7 @@ require_once __DIR__.'\..\boot\boot.php';
 
 use Hotel\Roomlist;
 $list = new Roomlist();
-$roomId=$_POST['GoToRoomPage'];
+$roomId=$_GET['GoToRoomPage'];
 $room = $list->getRoom($roomId);
 
 ?>
@@ -28,21 +28,60 @@ $room = $list->getRoom($roomId);
 <body>
     <?php include('header.php'); ?>
     <main class="row mt-4 container-fluid">
-        <section class="container mt-4">
-            <h4 class="bg-secondary p-2 text-light rounded"><?php echo $room['name']." - ".$room['city'].', '.$room['address'] ;?> | Reviews: <i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i> | <i class="fa fa-heart-o"></i></h4>
-            <img class="rounded mx-auto d-block" src="images/rooms/<?php echo $room['photo_url'] ?>" width="50%" alt="<?php echo $room['name']?>">
-            <div class="col-12 row">          
-                <p class="col-2 ms-4 btn bg-secondary text-light">Per night: <?php echo $room['price'] ?>€</p>
-                <div class="row col-9 ms-4 text-center">
-                    <p class="col-5 bg-light text-secondary p-2">Count of guests: <?php echo $room['count_of_guests']?></p>
-                    <p class="col-1 bg-light text-secondary p-2">|</p>
-                    <p class="col-6 bg-light text-secondary p-2">Type of room: <?php echo $room['type_id']?></p>
+        <section class="container my-4">
+            <h4 class="bg-secondary p-2 text-light rounded">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="text-start">
+                    <?php echo $room['name']." - ".$room['city'].', '.$room['address'] ;?> Reviews: <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i> | <i class="fa fa-heart-o"></i>
+                    </div>
+                    <div class="text-end">
+                    <span>Per night: <?php echo $room['price'] ?>€</span>
+                    </div>
                 </div>
+            </h4>
+                
+            <img class="rounded mx-auto d-block" src="images/rooms/<?php echo $room['photo_url'] ?>" width="50%" alt="<?php echo $room['name']?>">
+            <div class="col-12 row my-4 justify-content-center p-1">          
+                <div class="row col-10 justify-content-center text-center bg-light text-secondary pt-2">
+                    <p class="col-2 border-end"><i class="fa-solid fa-user"></i> <?php echo $room['count_of_guests']?></p>
+                    <p class="col-2 border-end"><i class="fa fa-bed" aria-hidden="true"></i> <?php echo $room['type_id']?></p>
+                    <p class="col-4 border-end"><i class="fas fa-parking"></i> <?php echo ($room['parking']==1) ? 'YES' : 'NO';?></p>
+                    <p class="col-2 border-end"><i class="fa fa-wifi" aria-hidden="true"></i> <?php echo ($room['wifi']==1) ? 'YES' : 'NO';?></p>
+                    <p class="col-2"><i class="fa fa-cat" aria-hidden="true"></i> <?php echo ($room['pet_friendly']==1) ? 'YES' : 'NO';?></p>
+                </div>                
+                <div class="row col-10 justify-content-center text-center bg-light text-secondary  pb-2">
+                    <p class="col-2 border-end">Guests</p>
+                    <p class="col-2 border-end">Room Type</p>
+                    <p class="col-4 border-end">Parking</p>
+                    <p class="col-2 border-end">Wi-fi</p>
+                    <p class="col-2">Pet Friendly</p>
+                </div>               
             </div>
-            <h4>Room Description</h4>
-            <p style="border-left:3px solid black;"><?php echo $room['description_short']?>
         </section>
-        <section class="container">
+        <section class="mb-5">
+            <form>
+            <div class="container-fluid row justify-content-around mb-3">
+                    <label for="checkin" class="col-2"><h4>Check-in Date</h4></label>
+                    <label for="checkout" class="col-2"><h4>Check-out Date</h4></label>
+                    <div class="col-2"></div>
+                </div>
+                <div class="container-fluid row justify-content-around mb-4">
+                    <input class="col-2" min="<?= date('Y-m-d'); //Sets min date to today?>" type="date"> 
+                    <input class="col-2" min="<?= date('Y-m-d'); ?>"type="date">
+                    <button class="col-2 btn btn-secondary" type="submit">Reserve</button>
+                </div>
+            </form>
+            <div>
+
+            </div>
+
+        </section>
+        
+        <section class="mb-4">
+            <h4 class="mb-3">Room Description</h4>
+            <p style="border-left:3px solid black;"><?php echo $room['description_long']?>
+        </section>
+        <section class="container mb-5">
             <div id="map" style="height: 400px; width: 100%;"></div>
         </section>
     </main>
