@@ -59,15 +59,16 @@ $room = $list->getRoom($roomId);
             </div>
         </section>
         <section class="mb-5">
-            <form>
+            <form action="actions/reservation.php" method="post">
             <div class="container-fluid row justify-content-around mb-3">
                     <label for="checkin" class="col-2"><h4>Check-in Date</h4></label>
                     <label for="checkout" class="col-2"><h4>Check-out Date</h4></label>
                     <div class="col-2"></div>
                 </div>
                 <div class="container-fluid row justify-content-around mb-4">
-                    <input class="col-2" min="<?= date('Y-m-d'); //Sets min date to today?>" type="date"> 
-                    <input class="col-2" min="<?= date('Y-m-d'); ?>"type="date">
+                    <input class="col-2" min="<?= date('Y-m-d'); //Sets min date to today?>" name="checkin" type="date"> 
+                    <input class="col-2" min="<?= date('Y-m-d'); ?>" name="checkout" type="date">
+                    <input type="hidden" id="roomid" name="roomid" value="<?=$room['room_id'] ?>">
                     <button class="col-2 btn btn-secondary" type="submit">Reserve</button>
                 </div>
             </form>
