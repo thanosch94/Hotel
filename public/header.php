@@ -1,6 +1,6 @@
 <header>
         <nav class="d-flex justify-content-around pt-4 bg-light shadow">
-            <p>Hotels</p>
+        <a class="text-decoration-none text-body" href="list.php"><p>Hotels</p></a>
      
             <div>
                 <a href="index.php" class="text-decoration-none text-body"><i class="fa-solid fa-house"></i>
