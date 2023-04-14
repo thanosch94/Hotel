@@ -2,8 +2,13 @@
 require_once __DIR__.'\..\boot\boot.php';
 
 use Hotel\Roomlist;
+use Hotel\Reservation;
 $list = new Roomlist();
-if(isset($_GET['roomtype']) || isset($_GET['city']) || isset($_GET['checkin']) || isset($_GET['checkout'])){
+$checkin = $_GET['checkin'];
+$checkout = $_GET['checkout'];
+$city = $_GET['city'];
+
+if(isset($_GET['roomtype']) || isset($city) || isset($checkin) || isset($checkout)){
     $roomlist = $list-> getListwithFilters();
 }else{
 $roomlist = $list-> getList();
@@ -13,6 +18,10 @@ $roomtypes = $list -> getroomTypes();
 $cities = $list -> getCities();
 $maxprice = $list -> getMaxPrice();
 $minprice = $list -> getMinPrice();
+
+$reservation = new Reservation();
+$reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
+
 
 ?>
 
@@ -36,7 +45,7 @@ $minprice = $list -> getMinPrice();
                 <div class="text-center p-4">
                     <h4>FIND THE PERFECT HOTEL</h4>
                 </div>
-                <form class="container">
+                <form class="container" method="get">
                 <select class="w-100 rounded p-2 mb-4 text-center" name="guests" id="guests">
                         <option value="" disabled selected>Count of guests</option>
                         <?php for($i=1; $i<=$maxGuests['count_of_guests']; $i++){
@@ -64,20 +73,27 @@ $minprice = $list -> getMinPrice();
                     </div>
                     <input 
                         class="w-100 rounded p-2 mb-4 text-center text-center";
-                        type="date"  min="<?= date('Y-m-d'); ?>"/>
+                        type="date"  min="<?= date('Y-m-d');?>";
+                        name = "checkin";
+                        />
+                        
                     <input 
                         class="w-100 rounded p-2 mb-4 text-center text-center";
-                        type="date"  min="<?= date('Y-m-d'); ?>"/>
+                        type="date"  min="<?= date('Y-m-d'); ?>";
+                        name = "checkout";/>
                     <button type="submit" class="btn bg-secondary w-100 text-light mb-4">FIND HOTELS</submit>
                 </form>
             </section>
         </aside>
-        <section class="col-8 mt-4">
+        <section class="col-8 mt-4 mb-5">
             <h3 class="bg-secondary p-2 text-light rounded">Search Results</h3>
                 <?php if(!$roomlist){
                         echo "<h4 class='m-3'> There are no results</h4>";
                         }
-                    foreach($roomlist as $room){ ?>
+                        
+                    
+                    foreach($roomlist as $room){ 
+                        ?>
                     <div class="row">
                         <div class="col-3 mb-5">
                             <img style="border-right:3px solid black; padding:10px" src="images/rooms/<?php echo $room['photo_url'] ?>" width="220px" alt="room-1">
@@ -90,12 +106,27 @@ $minprice = $list -> getMinPrice();
                                 <span class="col-8"></span>
                                 <form class="col-4 align-items-end" method="get" action="room.php">
                                     <button type="submit" name="GoToRoomPage" class=" btn btn-secondary" value="<?php echo $room['room_id'];?>">Go to Room Page</button>
+                                    <div class="col-4 align-items-end mt-3 mb-2">
+                                    <?php 
+                                    //Show reserved button if room is reserved for the dates somebody checks
+                                        $bookings = array();
+                                        foreach($reserv as $booked){
+                                            $bookings[$booked['room_id']] = 1;
+                                        }
+                                        if($bookings[$room['room_id']]>0){
+                                            echo '<button class="btn btn-warning" >Reserved</button>';
+                                        }
+                                    ?>
+                                    </div>
+                                    <input type="hidden" id="checkin" name="checkin" value="<?=$checkin ?>">
+                                    <input type="hidden" id="checkout" name="checkout" value="<?=$checkout ?>">
                                 </form>
+
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-12 row">
+                    <div class="col-12 row mb-3">
                         <p class="col-2 ms-4 btn bg-secondary text-light">Per night: <?php echo $room['price'] ?>€</p>
                         <div class="row col-9 ms-4 text-center">
                             <p class="col-5 bg-light text-secondary p-2">Count of guests: <?php echo $room['count_of_guests']?></p>
@@ -106,7 +137,7 @@ $minprice = $list -> getMinPrice();
                 <?php } ?>
         </section>
     </main>
-    <footer>
+    <footer class="position-fixed w-100 bottom-0">
         <p class="text-center m-0 p-4 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
     </footer>
 </body>

@@ -2,9 +2,16 @@
 require_once __DIR__.'\..\boot\boot.php';
 
 use Hotel\Roomlist;
+use Hotel\Reservation;
 $list = new Roomlist();
 $roomId=$_GET['GoToRoomPage'];
 $room = $list->getRoom($roomId);
+
+$checkin = $_GET['checkin'];
+$checkout = $_GET['checkout'];
+
+$reservation = new Reservation();
+$reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
 
 ?>
 <!DOCTYPE html>
@@ -58,6 +65,22 @@ $room = $list->getRoom($roomId);
                 </div>               
             </div>
         </section>
+        <section class="container-fluid text-end">
+        <?php 
+            //Show reserved button if room is reserved for the dates somebody checks
+            $bookings = array();
+            foreach($reserv as $booked){
+                $bookings[$booked['room_id']] = 1;
+            }
+            if($bookings[$room['room_id']]>0){
+                echo
+                '<div class="container-fluid row justify-content-around mb-3">
+                    <div class="col-2"></div>
+                    <div class="col-2"></div>
+                    <button class="col-2 text-center btn btn-warning">Reserved</button>
+                </div>';
+            }
+        ?></section>
         <section class="mb-5">
             <form action="actions/reservation.php" method="post">
             <div class="container-fluid row justify-content-around mb-3">
@@ -79,11 +102,28 @@ $room = $list->getRoom($roomId);
         </section>
         
         <section class="mb-4">
-            <h4 class="mb-3">Room Description</h4>
+            <h3 class="mb-3">Room Description</h3>
             <p style="border-left:3px solid black;"><?php echo $room['description_long']?>
         </section>
         <section class="container mb-5">
             <div id="map" style="height: 400px; width: 100%;"></div>
+        </section>
+        <hr>
+        <section>
+            <h3>Reviews</h3>
+            <div>
+
+            </div>
+        </section>
+        <section class="my-4">
+            <h3>Add Reviews</h3>
+            <form>
+            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                <textarea name="newReview" class="w-100 my-3" placeholder="Review" rows="4"></textarea>
+                <div class="text-center">
+                    <button class="btn btn-secondary">Submit</button>
+                </div>
+            </form>
         </section>
     </main>
     <footer>
