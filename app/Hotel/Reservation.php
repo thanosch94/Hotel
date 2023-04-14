@@ -24,9 +24,9 @@ class Reservation{
         $statement->execute();
     }
 
-    public function getReservations(){
+    public function getReservations($userid){
         $statement = $this->getPdo()->prepare('SELECT * FROM booking WHERE user_id = ? ORDER BY check_in_date ASC');
-        $statement->execute();
+        $statement->execute([$userid]);
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
