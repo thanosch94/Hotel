@@ -47,7 +47,7 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                     <h4>FIND THE PERFECT HOTEL</h4>
                 </div>
                 <form class="container" method="get">
-                    <div>
+                    <div class="mt-3">
                         <select class="required w-100 rounded p-2 mb-3 text-center" name="guests" id="guests" required>
                             <option value="" disabled selected>Count of guests</option>
                             <?php for($i=1; $i<=$maxGuests['count_of_guests']; $i++){
@@ -55,7 +55,7 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                         </select>
                         <p class="requiredMsg text-center" style='color:red'>This field is required</p>
                     </div>
-                    <div>
+                    <div class="mt-3">
                         <select class="required w-100 rounded p-2 mb-3 text-center"  name="roomtype" id="room_type" required>
                             <option value="" disabled selected>Room Type</option>
                             <?php foreach($roomtypes as $roomtype){
@@ -64,7 +64,7 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                         </select>  
                         <p class="requiredMsg text-center" style='color:red'>This field is required</p>                  
                     </div>
-                    <div>
+                    <div class="mt-3">
                         <select class="required w-100 rounded p-2 mb-3 text-center"  name="city" id="city" required>
                             <option value="" disabled selected>City</option>
                             <?php foreach($cities as $city){
@@ -73,14 +73,14 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                         </select>    
                         <p class="requiredMsg text-center" style='color:red'>This field is required</p>                
                     </div>
-                    <div class="row justify-content-around mb-2">
+                    <div class="row justify-content-around mb-2 mt-3">
                         <input type="number" value=<?php echo $minprice['price'];?> name="min_price" class="w-25 me-5">
                         <input type="number" value=<?php echo $maxprice['price'];?> name="max_price" class="w-25 ms-1">
                         <input type="range" class="mt-2 w-100" min=<?= $minprice['price'];?> max= <?= $maxprice['price'];?>> 
                         <label for="min_price" class="small w-25">Min price</label>
                         <label for="max_price" class="small w-25">Max price</label>
                     </div>
-                    <div>
+                    <div class="mt-3">
                         <input 
                             class="required w-100 rounded p-2 mb-3 text-center text-center";
                             type="date"  min="<?= date('Y-m-d');?>";
@@ -89,7 +89,7 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                             />
                             <p class="requiredMsg text-center" style='color:red'>This field is required</p>
                     </div>
-                    <div>
+                    <div class="mt-3">
                         <input 
                             class="required w-100 rounded p-2 mb-3 text-center text-center";
                             type="date"  min="<?= date('Y-m-d'); ?>";
@@ -97,7 +97,7 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                             required/>
                         <p class="requiredMsg text-center" style='color:red'>This field is required</p>
                     </div>
-                    <button type="submit" class="submitBtn btn bg-secondary w-100 text-light mb-4">FIND HOTELS</submit>
+                    <button type="submit" class="submitBtn btn bg-secondary w-100 text-light mb-4 mt-3"><i class="fa fa-search me-2" aria-hidden="true"></i>FIND HOTELS</submit>
                 </form>
             </section>
         </aside>
@@ -156,6 +156,6 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
     <footer class="position-fixed w-100 bottom-0">
         <p class="text-center m-0 p-4 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
     </footer>
-    <script src="assets/room.js"></script>
+    <script src="assets/form.js"></script>
 </body>
 </html>
