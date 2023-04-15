@@ -34,58 +34,74 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
     <title>Hotels</title>
     <link rel="stylesheet" href="assets/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/022912981f.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <?php include('header.php'); ?>
-    <main class="row mt-4 col-12">
-        <aside class="col-3  mt-4 ms-5">
+    <main class="row mt-4 mb-4 col-12">
+        <aside class="col-3 my-5 ms-5">
             <section class="container shadow rounded-3">
                 <div class="text-center p-4">
                     <h4>FIND THE PERFECT HOTEL</h4>
                 </div>
                 <form class="container" method="get">
-                <select class="w-100 rounded p-2 mb-4 text-center" name="guests" id="guests">
-                        <option value="" disabled selected>Count of guests</option>
-                        <?php for($i=1; $i<=$maxGuests['count_of_guests']; $i++){
-                        echo '<option value='. $i . '>'. $i . '</option>';};?>
-                    </select>
-                    <select class="w-100 rounded p-2 mb-4 text-center"  name="roomtype" id="room_type">
-                        <option value="" disabled selected>Room Type</option>
-                        <?php foreach($roomtypes as $roomtype){
-                        echo'<option value='. $roomtype['type_id'] . '>'. $roomtype['title'] . '</option>';}
-                        ?>
-                    </select>
-                    <select class="w-100 rounded p-2 mb-4 text-center"  name="city" id="city">
-                        <option value="" disabled selected>City</option>
-                        <?php foreach($cities as $city){
-                        echo'<option value='. $city['city'] . '>'. $city['city'] . '</option>';}
-                        ?>
-                    </select>
+                    <div>
+                        <select class="required w-100 rounded p-2 mb-3 text-center" name="guests" id="guests" required>
+                            <option value="" disabled selected>Count of guests</option>
+                            <?php for($i=1; $i<=$maxGuests['count_of_guests']; $i++){
+                            echo '<option value='. $i . '>'. $i . '</option>';};?>
+                        </select>
+                        <p class="requiredMsg text-center" style='color:red'>This field is required</p>
+                    </div>
+                    <div>
+                        <select class="required w-100 rounded p-2 mb-3 text-center"  name="roomtype" id="room_type" required>
+                            <option value="" disabled selected>Room Type</option>
+                            <?php foreach($roomtypes as $roomtype){
+                            echo'<option value='. $roomtype['type_id'] . '>'. $roomtype['title'] . '</option>';}
+                            ?>
+                        </select>  
+                        <p class="requiredMsg text-center" style='color:red'>This field is required</p>                  
+                    </div>
+                    <div>
+                        <select class="required w-100 rounded p-2 mb-3 text-center"  name="city" id="city" required>
+                            <option value="" disabled selected>City</option>
+                            <?php foreach($cities as $city){
+                            echo'<option value='. $city['city'] . '>'. $city['city'] . '</option>';}
+                            ?>
+                        </select>    
+                        <p class="requiredMsg text-center" style='color:red'>This field is required</p>                
+                    </div>
                     <div class="row justify-content-around mb-2">
                         <input type="number" value=<?php echo $minprice['price'];?> name="min_price" class="w-25 me-5">
                         <input type="number" value=<?php echo $maxprice['price'];?> name="max_price" class="w-25 ms-1">
                         <input type="range" class="mt-2 w-100" min=<?= $minprice['price'];?> max= <?= $maxprice['price'];?>> 
-
                         <label for="min_price" class="small w-25">Min price</label>
                         <label for="max_price" class="small w-25">Max price</label>
                     </div>
-                    <input 
-                        class="w-100 rounded p-2 mb-4 text-center text-center";
-                        type="date"  min="<?= date('Y-m-d');?>";
-                        name = "checkin";
-                        />
-                        
-                    <input 
-                        class="w-100 rounded p-2 mb-4 text-center text-center";
-                        type="date"  min="<?= date('Y-m-d'); ?>";
-                        name = "checkout";/>
-                    <button type="submit" class="btn bg-secondary w-100 text-light mb-4">FIND HOTELS</submit>
+                    <div>
+                        <input 
+                            class="required w-100 rounded p-2 mb-3 text-center text-center";
+                            type="date"  min="<?= date('Y-m-d');?>";
+                            name = "checkin";
+                            required
+                            />
+                            <p class="requiredMsg text-center" style='color:red'>This field is required</p>
+                    </div>
+                    <div>
+                        <input 
+                            class="required w-100 rounded p-2 mb-3 text-center text-center";
+                            type="date"  min="<?= date('Y-m-d'); ?>";
+                            name = "checkout";
+                            required/>
+                        <p class="requiredMsg text-center" style='color:red'>This field is required</p>
+                    </div>
+                    <button type="submit" class="submitBtn btn bg-secondary w-100 text-light mb-4">FIND HOTELS</submit>
                 </form>
             </section>
         </aside>
-        <section class="col-8 mt-4 mb-5">
+        <section class="col-8 my-5">
             <h3 class="bg-secondary p-2 text-light rounded">Search Results</h3>
                 <?php if(!$roomlist){
                         echo "<h4 class='m-3'> There are no results</h4>";
@@ -140,5 +156,6 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
     <footer class="position-fixed w-100 bottom-0">
         <p class="text-center m-0 p-4 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
     </footer>
+    <script src="assets/room.js"></script>
 </body>
 </html>
