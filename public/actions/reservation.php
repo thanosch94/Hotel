@@ -15,9 +15,10 @@ $currentUser =$user ->getCurrentUserId();
 $roomid = $_POST['roomid'];
 $checkin = $_POST['checkin'];
 $checkout = $_POST['checkout'];
+$total= $_POST['total'];
 
 $reservation = new Reservation;
-$reservation ->reservations($currentUser,$roomid,$checkin,$checkout,$total=0); 
+$reservation ->reservations($currentUser,$roomid,$checkin,$checkout,$total); 
 
 $list = new Roomlist;
 $room = $list ->getRoom($roomid);
@@ -94,7 +95,7 @@ $room = $list ->getRoom($roomid);
                             <div class="row text-center">
                                 <h6 class="col-4"><?=$checkin?></h6>
                                 <h6 class="col-4"><?=$checkout?></h6>
-                                <h6 class="col-4">0</h6>
+                                <h6 class="col-4"><?=$total?>€</h6>
                             </div>
                         </div>
                     </div>
