@@ -30,4 +30,11 @@ class Reservation{
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getReservationsbyDate($checkin, $checkout){
+        $statement = $this->getPdo()->prepare('SELECT * FROM booking WHERE ((check_in_date<=:check_in_date OR check_in_date<=:check_out_date) AND (check_out_date>=:check_out_date OR check_out_date>=:check_in_date))');
+        $statement ->bindParam(':check_in_date', $checkin, PDO::PARAM_STR);
+        $statement ->bindParam(':check_out_date', $checkout, PDO::PARAM_STR);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
