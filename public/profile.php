@@ -1,11 +1,24 @@
 <?php
 require_once __DIR__.'\..\boot\boot.php';
 use Hotel\User;
+use Hotel\Reservation;
+use Hotel\Roomlist;
 
-if(empty(User::getCurrentUserId())){
+$currentUser =$user->getCurrentUserId();
+
+if(empty($currentUser)){
 
     header('Location: /hotel/public/login.php');
 }
+
+
+
+$reservations = new Reservation;
+$reservation = $reservations->getReservations($currentUser);
+
+
+$list = new Roomlist();
+
 
 ?>
 <!DOCTYPE html>
@@ -33,13 +46,43 @@ if(empty(User::getCurrentUserId())){
                     <div class="reviews"></div>
                 </div>
             </aside>
-            <section class="col-7 mt-4 ms-5">
+            <section class="col-7 mt-4 ms-5 mb-5">
                 <h4 class="bg-secondary p-2 text-light rounded">My bookings</h4>
+                <?php if(!$reservation){
+                            echo "<h4 class='m-3'> There are no reservations</h4>";}
+                    foreach($reservation as $reserv){ 
+                        $room = $list-> getRoom($reserv['room_id']);
+                            ?>
+                    <div class="row">
+                        <div class="col-3 mb-5">
+                            <img style="border-right:3px solid black; padding:10px" src="images/rooms/<?php echo $room['photo_url'] ?>" width="220px" alt="room-1">
+                        </div>
+                        <div class="col-9">
+                            <h4><?php echo $room['name'];?><h4>
+                            <h5 class="text-secondary"><?php echo $room['city'].', '.$room['address'];?></h5>
+                            <p><?php echo $room['description_short']?></p>
+                            <div class="row">
+                                <span class="col-8"></span>
+                                <form class="col-4 align-items-end" method="get" action="room.php">
+                                    <button type="submit" name="GoToRoomPage" class=" btn btn-secondary" value="<?php echo $room['room_id'];?>">Go to Room Page</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-12 row mb-3">
+                        <p class="col-2 ms-4 btn bg-secondary text-light">Total: 0€</p>
+                        <div class="row col-9 ms-4 text-center">
+                            <p class="col-5 bg-light text-secondary p-2">Check-in Date: <?php echo $reserv['check_in_date']?></p>
+                            <p class="col-1 bg-light text-secondary p-2">|</p>
+                            <p class="col-6 bg-light text-secondary p-2">Check-out Date: <?php echo $reserv['check_out_date']?></p>
+                        </div>
+                    </div>
+                <?php } ?>
             </section>
         </div>
     </main>
-    <footer class="position-absolute w-100 bottom-0">
+    <footer  class="position-fixed w-100 bottom-0">
         <p class="text-center m-0 p-4 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
     </footer>
 </body>
