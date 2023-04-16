@@ -71,11 +71,11 @@ $list = new Roomlist();
                     </div>
 
                     <div class="col-12 row mb-3">
-                        <p class="col-2 ms-4 btn bg-secondary text-light">Total: 0€</p>
+                        <p class="col-2 ms-4 btn bg-secondary text-light">Total: <?=$reserv['total_price']?>€</p>
                         <div class="row col-9 ms-4 text-center">
-                            <p class="col-5 bg-light text-secondary p-2">Check-in Date: <?php echo $reserv['check_in_date']?></p>
+                            <p class="col-5 bg-light text-secondary p-2">Check-in Date: <?=$reserv['check_in_date']?></p>
                             <p class="col-1 bg-light text-secondary p-2">|</p>
-                            <p class="col-6 bg-light text-secondary p-2">Check-out Date: <?php echo $reserv['check_out_date']?></p>
+                            <p class="col-6 bg-light text-secondary p-2">Check-out Date: <?=$reserv['check_out_date']?></p>
                         </div>
                     </div>
                 <?php } ?>

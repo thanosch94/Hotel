@@ -19,7 +19,7 @@ class Reservation{
         $statement ->bindParam(':room_id', $roomid, PDO::PARAM_STR);
         $statement ->bindParam(':check_in_date', $checkin, PDO::PARAM_STR);
         $statement ->bindParam(':check_out_date', $checkout, PDO::PARAM_STR);
-        $statement ->bindParam(':total_price', $total, PDO::PARAM_STR);
+        $statement ->bindParam(':total_price', $total, PDO::PARAM_INT);
 
         $statement->execute();
     }
