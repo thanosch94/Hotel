@@ -3,6 +3,10 @@ require_once __DIR__.'\..\boot\boot.php';
 
 use Hotel\Roomlist;
 use Hotel\Reservation;
+use Hotel\User;
+$currentUser =$user->getCurrentUserId();
+
+
 $list = new Roomlist();
 $roomId=$_GET['GoToRoomPage'];
 $room = $list->getRoom($roomId);
@@ -30,6 +34,8 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
         let $lat =<?=$room['location_lat']?>;
         let $lon =<?=$room['location_long']?>;
     </script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBa-kw7ys-lWtcLK6O-ZwJZL3RvXXqOUys&callback=initMap" async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/022912981f.js" crossorigin="anonymous"></script>
@@ -73,7 +79,7 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
             <div class="container-fluid row justify-content-around mb-3">
                     <label for="checkin" class="col-2"><h4>Check-in Date</h4></label>
                     <label for="checkout" class="col-2"><h4>Check-out Date</h4></label>
-                    <div class="col-2"></div>
+                    <div class="col-2 changeDates"></div>
                 </div>
                 <div class="container-fluid row justify-content-around mb-4">
                     <input class="col-2 checkInDate" min="<?= date('Y-m-d'); //Sets min date to today?>" name="checkin" type="date"> 
@@ -81,16 +87,21 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                     <input type="hidden" id="roomid" name="roomid" value="<?=$room['room_id'] ?>">
                     <input class="total" type="hidden" id="total" name="total" value="">
                     <?php 
+                    if(empty($currentUser)){
+                        echo '<a class="col-2 " href="login.php"><button class="btn btn-warning px-5" type="button" >Login</button></a>';
+                      
+                    }else{
                         //Show reserved button if room is reserved for the dates somebody checks
                         $bookings = array();
                         foreach($reserv as $booked){
                             $bookings[$booked['room_id']] = 1;
                         }
                         if($bookings[$room['room_id']]>0){
-                            echo '<button class="col-2 btn btn-warning" type="button" >Reserved</button>';
+                            echo '<button class="Btnajax col-2 btn btn-warning" type="button" >Reserved</button>';
                         } else{
-                            echo '<button class="btnSubmit col-2 btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Reserve</button>';
+                            echo '<button class="Btnajax btnSubmit col-2 btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Reserve</button>';
                         }
+                    }
                     ?>
                            </div>
 
@@ -149,5 +160,6 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
         <p class="text-center m-0 p-4 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
     </footer>
     <script src="assets/room.js"></script>
+    <script src="assets/reserved.js"></script>
 </body>
 </html>
