@@ -54,12 +54,14 @@ class Roomlist{
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
     public function getListwithFilters(){
+        $guests = $_GET['guests'];
         $city = $_GET['city'];
         $roomtype = $_GET['roomtype'];
         $checkin = $_GET['checkin'];
         $checkout = $_GET['checkout'];
-
-        $statement = $this->getPdo()->prepare('SELECT * FROM room WHERE city = COALESCE(:city, city) AND type_id = COALESCE(:roomtype, type_id)');
+    
+        $statement = $this->getPdo()->prepare('SELECT * FROM room WHERE city = COALESCE(:city, city) AND type_id <= COALESCE(:roomtype, type_id) AND count_of_guests >= COALESCE(:count_of_guests, count_of_guests)');
+        $statement->bindParam(':count_of_guests', $guests, PDO::PARAM_INT);
         $statement->bindParam(':city', $city, PDO::PARAM_STR);
         $statement->bindParam(':roomtype', $roomtype, PDO::PARAM_INT);
         $statement->execute();
