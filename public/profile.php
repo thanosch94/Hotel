@@ -3,6 +3,7 @@ require_once __DIR__.'\..\boot\boot.php';
 use Hotel\User;
 use Hotel\Reservation;
 use Hotel\Roomlist;
+use Hotel\Review;
 
 $currentUser =$user->getCurrentUserId();
 
@@ -18,7 +19,8 @@ $reservation = $reservations->getReservations($currentUser);
 
 
 $list = new Roomlist();
-
+$reviews =new Review;
+$AllReviews =$reviews ->getReviewsbyUser($currentUser);
 
 ?>
 <!DOCTYPE html>
@@ -40,10 +42,31 @@ $list = new Roomlist();
         <div class="row container-fluid" >
             <aside class="col-3 mt-4 ms-5 rounded-3">
                 <div class="text-center container shadow p-4">
-                    <h4>Favorites</h4>
+                    <h3>Favorites</h3>
                     <div class="favorites"></div>
-                    <h4>Reviews</h4>
-                    <div class="reviews"></div>
+                    <h3>Reviews</h3>
+                    <div class="reviews">
+                    <?php foreach($AllReviews as $review){
+                        $room = $list->getRoom($review['room_id']);
+                        $i++;
+                ?>
+                <div>
+                    <div class="col-12 mt-3">
+                        <a class="text-decoration-none"style="color:black" href="room.php?GoToRoomPage=<?=$review['room_id']?>"><h4><?php echo $i.". ". $room['name'];?></h4></a>
+                    </div>
+                    <div class="col-12">
+                        <?php for($i=1; $i<=$review['rate']; $i++){
+                            echo '<i class="fa fa-star" style="color:orange"></i>';
+                        }
+                        for($i=1; $i<=(5-$review['rate']); $i++){
+                            
+                            echo '<i class="fa fa-star-o"></i>';
+                        }
+                        ?>
+                    </div>
+                </div>
+                <?php } ?>
+                    </div>
                 </div>
             </aside>
             <section class="col-7 mt-4 ms-5 mb-5">

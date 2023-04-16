@@ -4,6 +4,8 @@ require_once __DIR__.'\..\boot\boot.php';
 use Hotel\Roomlist;
 use Hotel\Reservation;
 use Hotel\User;
+use Hotel\Review;
+$user = new User;
 $currentUser =$user->getCurrentUserId();
 
 
@@ -16,6 +18,17 @@ $checkout = $_GET['checkout'];
 $reservation = new Reservation();
 $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
 
+//Find average to display room rate
+$reviews = new Review;
+$AllReviews =$reviews ->getReviews($roomId);
+
+    $values=array();
+    foreach($AllReviews as $review){
+        array_push($values,$review['rate']);
+    }
+    if(count($values)){
+    $average = round(array_sum($values) / count($values));
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,12 +60,22 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
             <h4 class="bg-secondary p-2 text-light rounded">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="text-start">
-                    <?php echo $room['name']." - ".$room['city'].', '.$room['address'] ;?> Reviews: <i class="fa fa-star" style="color:orange"></i><i class="fa fa-star" style="color:orange"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> | <i class="fa fa-heart" style="color:red"></i>
+                        <?php echo $room['name']." - ".$room['city'].', '.$room['address'] ;?> 
+                            Reviews: 
+                            <div class="col-2 d-inline">
+                                <?php for($i=1; $i<=$average; $i++){
+                                    echo '<i class="fa fa-star" style="color:orange"></i>';
+                                }
+                                for($i=1; $i<=(5-$average); $i++){
+                                    
+                                    echo '<i class="fa fa-star-o"></i>';
+                                }
+                            
+                        ?>
+                            </div> | <i class="favorite fa fa-heart"></i>
                     </div>
-                    <div class="text-end">
-                    <span>Per night: <?php echo $room['price'] ?>€</span>
-                    </div>
-                </div>
+                <div class="text-end">
+            <span>Per night: <?php echo $room['price'] ?>€</span>
             </h4>
                 
             <img class="rounded mx-auto d-block" src="images/rooms/<?php echo $room['photo_url'] ?>" width="50%" alt="<?php echo $room['name']?>">
@@ -140,18 +163,50 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
         </section>
         <hr>
         <section>
-            <h3>Reviews</h3>
+            <h3 class="mb-3">Reviews</h3>
             <div>
-
+                <?php foreach($AllReviews as $review){
+                    $userbyId = $user ->getById($review['user_id']);
+                   
+                ?>
+                <div class="row">
+                    <div class="col-2">
+                        <h5><?=$userbyId['name'];?></h5>
+                        <p class="text-secondary">Add date: <?=$review['created_time'];?></p>
+                    </div>
+                    <div class="col-2">
+                        <?php for($i=1; $i<=$review['rate']; $i++){
+                            echo '<i class="fa fa-star" style="color:orange"></i>';
+                        }
+                        for($i=1; $i<=(5-$review['rate']); $i++){
+                            
+                            echo '<i class="fa fa-star-o"></i>';
+                        }
+                        ?>
+                    </div>
+                </div>
+                <p class="w-50"><?=$review['comment']?></p>
+                <hr class="w-50 text-start">
+                <?php } ?>
             </div>
         </section>
         <section class="my-4">
             <h3>Add Review</h3>
-            <form>
-            <i class="fa fa-star" style="color:orange"></i><i class="fa fa-star" style="color:orange"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
-                <textarea name="newReview" class="w-100 my-3" placeholder="Review" rows="4"></textarea>
+
+            <form action="actions/review.php" method="post">
+ 
+                    <div class="col-2">
+                        <i class="star1 fa fa-star-o"></i><i class="star2 fa fa-star-o"></i><i class="star3 fa fa-star-o"></i><i class="star4 fa fa-star-o"></i><i class="star5 fa fa-star-o"></i>
+                    </div>
+                    <div class="reviewMsg text-start" style="color:red; display:none">
+                        <p>*Please select</p>
+                    </div>
+                <input type="hidden" id="stars" name="stars" value="" required>
+                <input type="hidden" id="roomid" name="roomid" value="<?=$roomId?>" required>
+                <input type="hidden" id="user" name="user" value="<?=$currentUser?>" required>
+                <textarea name="newReview" class="w-100 my-3" placeholder="Review" rows="4" required></textarea>
                 <div class="text-center">
-                    <button class="btn btn-secondary">Submit</button>
+                    <button class="reviewBtn btn btn-secondary">Submit</button>
                 </div>
             </form>
         </section>

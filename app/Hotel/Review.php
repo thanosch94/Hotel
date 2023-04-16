@@ -25,4 +25,14 @@ class Review{
 
 
     }
+    public function getReviews($roomId){
+        $statement = $this->getPdo()->prepare('SELECT * FROM review WHERE room_id = ? ORDER BY created_time DESC');
+        $statement->execute([$roomId]);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getReviewsbyUser($userId){
+        $statement = $this->getPdo()->prepare('SELECT * FROM review WHERE user_id = ? ORDER BY created_time DESC');
+        $statement->execute([$userId]);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
