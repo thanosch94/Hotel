@@ -14,48 +14,50 @@
     <?php include('header.php'); ?>
     <main>
         <section class="h-100 h-custom gradient-custom-2">
-            <div class="container col-6 justify-content-center py-5 h-100">
+            <div class="container col-6 justify-content-center py-3 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="card card-registration card-registration-2" style="border-radius: 15px;">
                         <div class="card-body p-0">
                             <div class="row g-0">
-                                <div class="p-5">
-                                    <h3 class="fw-normal text-center mb-5">Registration</h3>
+                                <div class="px-5 py-3">
+                                    <h3 class="fw-normal text-center mb-4">Registration</h3>
                                     <form action="actions/register.php" method="post">
                                         <div>
-                                            <div class="mb-4 pb-2">
+                                            <div class="mb-1 pb-2">
                                                 <div class="form-outline">
-                                                    <input type="text" id="name" name="name" class="form-control form-control-lg" />
+                                                    <input type="text" id="name" name="name" class="form-control form-control-lg" required/>
                                                     <label class="form-label" for="name">Name</label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="mb-4">
+                                        <div class="mb-1">
                                             <div class="form-outline form-white">
-                                                <input type="text" id="email" name="email" class="form-control form-control-lg" />
+                                                <input type="email" id="email" name="email" class="form-control form-control-lg" required />
                                                 <label class="form-label" for="email">Your Email</label>
                                             </div>
                                         </div>
-                                        <div class="mb-4 pb-2">
-                                            <div class="form-outline">
-                                                <input type="text" id="email" class="form-control form-control-lg" />
+                                        <div class="mb-1 pb-2">
+                                            <div class="form-outline emailConf">
+                                                <input type="email" id="emailConf" class="form-control form-control-lg" required />
                                                 <label class="form-label" for="emailConf">Confirm Email</label>
+                                                <p class="emailMsg" style="color:red; display:none">*Emails don't match</p>
                                             </div>
                                         </div>
-                                        <div class="mb-4 pb-2">
+                                        <div class="mb-1 pb-2">
                                             <div class="form-outline">
-                                                <input type="text" id="password" name="password" class="form-control form-control-lg" />
+                                                <input type="password" id="password" name="password" class="form-control form-control-lg" required/>
                                                 <label class="form-label" for="password">Password</label>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-12 mb-4 pb-2 mb-md-0 pb-md-0">
-                                                <div class="form-outline">
-                                                    <input type="text" id="password" class="form-control form-control-lg" />
+                                            <div class="col-md-12 mb-1 pb-2 mb-md-0 pb-md-0">
+                                                <div class="form-outline passwordConf">
+                                                    <input type="password" id="passwordConf" class="form-control form-control-lg" required/>
                                                     <label class="form-label" for="passwordConf">Confirm Password</label>
+                                                    <p class="passMsg" style="color:red; display:none">*Passwords don't match</p>
                                                 </div>
-                                                <div class="form-check d-flex justify-content-start mt-3 mb-4 pb-3">
-                                                    <input class="form-check-input me-3" type="checkbox" value="" id="terms" />
+                                                <div class="form-check d-flex justify-content-start mt-3 mb-1 pb-3">
+                                                    <input class="form-check-input me-3" type="checkbox" value="" id="terms" required/>
                                                     <label class="form-check-label" for="terms">
                                                     I do accept the <a href="#!"><u>Terms and Conditions</u></a> of your
                                                     site.
@@ -64,7 +66,7 @@
                                             </div>
                                         </div>
                                         
-                                        <button type="submit" class="btn btn-secondary text-light btn-lg mt-4"
+                                        <button type="submit" class="BtnSubmit btn btn-secondary text-light btn-lg mt-2"
                                                 data-mdb-ripple-color="dark">Register</button>
                                     </form>
                                 </div>
@@ -75,8 +77,9 @@
             </div>
         </section>
     </main>
-    <footer class="position-absolute w-100 bottom-0 pt-5 pb-5 top-100">
+    <footer>
         <p class="text-center p-4 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
     </footer>
+    <script src="assets/register.js"></script>
 </body>
 </html>
