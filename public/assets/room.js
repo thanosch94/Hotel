@@ -91,4 +91,61 @@ if (myModal) {
 }
 
 //Review section
-addEventListener("input", (e) => {});
+let selected = 0;
+let stars = [];
+let review = 0;
+const starReview = document.querySelector("#stars");
+
+const $reviewBtn = document.querySelector(".reviewBtn");
+const $reviewMsg = document.querySelector(".reviewMsg");
+
+for (let i = 1; i <= 5; i++) {
+  stars[i] = document.querySelector(`.star${i}`);
+
+  stars[i].addEventListener("click", (e) => {
+    selected = i;
+    review = i;
+    starReview.value = review;
+
+    $reviewMsg.style.display = "none";
+    for (let j = 1; j <= i; j++) {
+      stars[j].style.color = "orange";
+      stars[j].classList.remove("fa-star-o");
+      stars[j].classList.add("fa-star");
+    }
+  });
+
+  stars[i].addEventListener("mouseover", (e) => {
+    for (let j = 1; j <= i; j++) {
+      stars[j].style.color = "orange";
+      stars[j].classList.remove("fa-star-o");
+      stars[j].classList.add("fa-star");
+    }
+    for (let j = i + 1; j <= 5; j++) {
+      stars[j].style.color = "";
+      stars[j].classList.remove("fa-star");
+      stars[j].classList.add("fa-star-o");
+    }
+  });
+
+  stars[i].addEventListener("mouseout", (e) => {
+    for (let j = 1; j <= 5; j++) {
+      if (j > selected) {
+        stars[j].style.color = "";
+        stars[j].classList.remove("fa-star");
+        stars[j].classList.add("fa-star-o");
+      } else if (j < selected) {
+        stars[j + 1].style.color = "orange";
+        stars[j + 1].classList.remove("fa-star-o");
+        stars[j + 1].classList.add("fa-star");
+      }
+    }
+  });
+}
+
+$reviewBtn.addEventListener("click", (e) => {
+  if (!starReview.value) {
+    e.preventDefault();
+    $reviewMsg.style.display = "block";
+  }
+});
