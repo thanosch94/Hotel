@@ -9,7 +9,6 @@ $room = $list->getRoom($roomId);
 
 $checkin = $_GET['checkin'];
 $checkout = $_GET['checkout'];
-
 $reservation = new Reservation();
 $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
 
@@ -25,8 +24,11 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">  
     <script src="assets/map.js"></script>
     <script>
-        let $lat =<?php echo $room['location_lat']?>;
-        let $lon =<?php echo $room['location_long']?>;
+        let price = <?=$room['price'];?>;
+        let checkin = "<?=$checkin?>"; //Assign check in date from Get to a js variable
+        let checkout = "<?=$checkout ?>";//Assign check out date from Get to a js variable
+        let $lat =<?=$room['location_lat']?>;
+        let $lon =<?=$room['location_long']?>;
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBa-kw7ys-lWtcLK6O-ZwJZL3RvXXqOUys&callback=initMap" async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
@@ -39,7 +41,7 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
             <h4 class="bg-secondary p-2 text-light rounded">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="text-start">
-                    <?php echo $room['name']." - ".$room['city'].', '.$room['address'] ;?> Reviews: <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i> | <i class="fa fa-heart-o"></i>
+                    <?php echo $room['name']." - ".$room['city'].', '.$room['address'] ;?> Reviews: <i class="fa fa-star" style="color:orange"></i><i class="fa fa-star" style="color:orange"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> | <i class="fa fa-heart" style="color:red"></i>
                     </div>
                     <div class="text-end">
                     <span>Per night: <?php echo $room['price'] ?>€</span>
@@ -65,22 +67,7 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                 </div>               
             </div>
         </section>
-        <section class="container-fluid text-end">
-        <?php 
-            //Show reserved button if room is reserved for the dates somebody checks
-            $bookings = array();
-            foreach($reserv as $booked){
-                $bookings[$booked['room_id']] = 1;
-            }
-            if($bookings[$room['room_id']]>0){
-                echo
-                '<div class="container-fluid row justify-content-around mb-3">
-                    <div class="col-2"></div>
-                    <div class="col-2"></div>
-                    <button class="col-2 text-center btn btn-warning">Reserved</button>
-                </div>';
-            }
-        ?></section>
+
         <section class="mb-5">
             <form action="actions/reservation.php" method="post">
             <div class="container-fluid row justify-content-around mb-3">
@@ -89,14 +76,46 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                     <div class="col-2"></div>
                 </div>
                 <div class="container-fluid row justify-content-around mb-4">
-                    <input class="col-2" min="<?= date('Y-m-d'); //Sets min date to today?>" name="checkin" type="date"> 
-                    <input class="col-2" min="<?= date('Y-m-d'); ?>" name="checkout" type="date">
+                    <input class="col-2 checkInDate" min="<?= date('Y-m-d'); //Sets min date to today?>" name="checkin" type="date"> 
+                    <input class="col-2 checkOutDate" min="<?= $checkin;//Min date can't be before checkin date ?>" name="checkout" type="date">
                     <input type="hidden" id="roomid" name="roomid" value="<?=$room['room_id'] ?>">
-                    <button class="col-2 btn btn-secondary" type="submit">Reserve</button>
-                </div>
-            </form>
-            <div>
+                    <input class="total" type="hidden" id="total" name="total" value="">
+                    <?php 
+                        //Show reserved button if room is reserved for the dates somebody checks
+                        $bookings = array();
+                        foreach($reserv as $booked){
+                            $bookings[$booked['room_id']] = 1;
+                        }
+                        if($bookings[$room['room_id']]>0){
+                            echo '<button class="col-2 btn btn-warning" type="button" >Reserved</button>';
+                        } else{
+                            echo '<button class="btnSubmit col-2 btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Reserve</button>';
+                        }
+                    ?>
+                           </div>
 
+                <!-- Modal for reservation confirmation -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Reservation Confirmation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to confirm your reservation?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning">Confirm</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+
+            </form>
+            <div class="calculateTotal container bg-light rounded mt-5">
             </div>
 
         </section>
@@ -116,9 +135,9 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
             </div>
         </section>
         <section class="my-4">
-            <h3>Add Reviews</h3>
+            <h3>Add Review</h3>
             <form>
-            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+            <i class="fa fa-star" style="color:orange"></i><i class="fa fa-star" style="color:orange"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
                 <textarea name="newReview" class="w-100 my-3" placeholder="Review" rows="4"></textarea>
                 <div class="text-center">
                     <button class="btn btn-secondary">Submit</button>
@@ -129,5 +148,6 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
     <footer>
         <p class="text-center m-0 p-4 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
     </footer>
+    <script src="assets/room.js"></script>
 </body>
 </html>
