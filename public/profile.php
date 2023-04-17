@@ -4,6 +4,7 @@ use Hotel\User;
 use Hotel\Reservation;
 use Hotel\Roomlist;
 use Hotel\Review;
+use Hotel\Favorite;
 
 $currentUser =$user->getCurrentUserId();
 
@@ -18,9 +19,13 @@ $reservations = new Reservation;
 $reservation = $reservations->getReservations($currentUser);
 
 
-$list = new Roomlist();
+$list = new Roomlist;
 $reviews =new Review;
 $AllReviews =$reviews ->getReviewsbyUser($currentUser);
+
+
+$favorites = new Favorite;
+$AllFavorites = $favorites ->getFavoritesbyUser($currentUser);
 
 ?>
 <!DOCTYPE html>
@@ -43,29 +48,35 @@ $AllReviews =$reviews ->getReviewsbyUser($currentUser);
             <aside class="col-3 mt-4 ms-5 rounded-3">
                 <div class="text-center container shadow p-4">
                     <h3>Favorites</h3>
-                    <div class="favorites"></div>
+                    <div class="favorites mb-4">
+                    <?php foreach($AllFavorites as $favorite){
+                                    $room = $list->getRoom( $favorite['room_id']);
+                                    $j++;
+                            ?>
+                        <div class="col-12 mt-3">
+                                <a class="text-decoration-none"style="color:black" href="room.php?GoToRoomPage=<?=$favorite['room_id']?>"><h5><?php echo $j.". ". $room['name'];?></h5></a>
+                        </div> <?php } ?>
+                    </div>
                     <h3>Reviews</h3>
                     <div class="reviews">
-                    <?php foreach($AllReviews as $review){
-                        $room = $list->getRoom($review['room_id']);
-                        $i++;
-                ?>
-                <div>
-                    <div class="col-12 mt-3">
-                        <a class="text-decoration-none"style="color:black" href="room.php?GoToRoomPage=<?=$review['room_id']?>"><h4><?php echo $i.". ". $room['name'];?></h4></a>
-                    </div>
-                    <div class="col-12">
-                        <?php for($i=1; $i<=$review['rate']; $i++){
-                            echo '<i class="fa fa-star" style="color:orange"></i>';
-                        }
-                        for($i=1; $i<=(5-$review['rate']); $i++){
-                            
-                            echo '<i class="fa fa-star-o"></i>';
-                        }
-                        ?>
-                    </div>
-                </div>
-                <?php } ?>
+                        <?php foreach($AllReviews as $review){
+                            $room = $list->getRoom($review['room_id']);
+                            $i++;?>
+                        <div>
+                            <div class="col-12 mt-3">
+                                <a class="text-decoration-none"style="color:black" href="room.php?GoToRoomPage=<?=$review['room_id']?>"><h5><?php echo $i.". ". $room['name'];?></h5></a>
+                            </div>
+                            <div class="col-12">
+                                <?php for($i=1; $i<=$review['rate']; $i++){
+                                    echo '<i class="fa fa-star" style="color:orange"></i>';
+                                }
+                                for($i=1; $i<=(5-$review['rate']); $i++){
+                                    
+                                    echo '<i class="fa fa-star-o"></i>';
+                                }
+                                ?>
+                            </div>
+                        </div> <?php } ?>
                     </div>
                 </div>
             </aside>

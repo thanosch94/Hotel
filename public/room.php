@@ -5,6 +5,7 @@ use Hotel\Roomlist;
 use Hotel\Reservation;
 use Hotel\User;
 use Hotel\Review;
+use Hotel\Favorite;
 $user = new User;
 $currentUser =$user->getCurrentUserId();
 
@@ -29,6 +30,9 @@ $AllReviews =$reviews ->getReviews($roomId);
     if(count($values)){
     $average = round(array_sum($values) / count($values));
     }
+
+    
+$favorite = new Favorite;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +76,12 @@ $AllReviews =$reviews ->getReviews($roomId);
                                 }
                             
                         ?>
-                            </div> | <i class="favorite fa fa-heart"></i>
+                            </div> | 
+                            <?php if(!$favorite->getFavorites($currentUser, $roomId)){
+                            echo '<a class="text-decoration-none" style="color:white" href="actions/favorite.php?user_id='.$currentUser.'&room_id='.$room['room_id'].'"><i class="favorite fa fa-heart"></i></a>';
+                            }else{
+                                echo '<a class="text-decoration-none" style="color:red" href="actions/favorite.php?user_id='.$currentUser.'&room_id='.$room['room_id'].'"><i class="favorite fa fa-heart"></i></a>';
+                                }?>
                     </div>
                 <div class="text-end">
             <span>Per night: <?php echo $room['price'] ?>€</span>
