@@ -212,7 +212,9 @@ $favorite = new Favorite;
                     </div>
                 <input type="hidden" id="stars" name="stars" value="" required>
                 <input type="hidden" id="roomid" name="roomid" value="<?=$roomId?>" required>
-                <input type="hidden" id="user" name="user" value="<?=$currentUser?>" required>
+                <input type="hidden" id="user" name="user" value="<?php if ($currentUser){//Checks if there is a logged in user or else Anonymous
+                                                                    echo $currentUser;
+                                                                    }else {echo 1;}?>" required>
                 <textarea name="newReview" class="w-100 my-3" placeholder="Review" rows="4" required></textarea>
                 <div class="text-center">
                     <button class="reviewBtn btn btn-secondary">Submit</button>
