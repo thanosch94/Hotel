@@ -3,7 +3,14 @@ require_once __DIR__.'\..\boot\boot.php';
 
 use Hotel\Roomlist;
 use Hotel\Reservation;
+use Hotel\User;
+$currentUser =$user->getCurrentUserId();
 $list = new Roomlist();
+
+if (isset($_GET['guests'])){
+    $guests = $_GET['guests'];
+};
+$roomtype =$_GET['roomtype'];
 $checkin = $_GET['checkin'];
 $checkout = $_GET['checkout'];
 $city = $_GET['city'];
@@ -34,7 +41,13 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
     <title>Hotels</title>
     <link rel="stylesheet" href="assets/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
+    <script>
+        let $guests = "<?=$guests?>"
+        let $roomtype = "<?=$roomtype?>";
+        let $checkin = "<?=$checkin?>";
+        let $checkout = "<?=$checkout?>";
+        let $city = "<?=$city?>";
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/022912981f.js" crossorigin="anonymous"></script>
 </head>
@@ -83,6 +96,7 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                     <div class="mt-3">
                         <input 
                             class="required w-100 rounded p-2 mb-3 text-center text-center";
+                            id="checkin";
                             type="date"  min="<?= date('Y-m-d');?>";
                             name = "checkin";
                             required
@@ -92,6 +106,7 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                     <div class="mt-3">
                         <input 
                             class="required w-100 rounded p-2 mb-3 text-center text-center";
+                            id="checkout";
                             type="date"  min="<?= date('Y-m-d'); ?>";
                             name = "checkout";
                             required/>
@@ -121,8 +136,7 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                             <div class="row">
                                 <span class="col-8"></span>
                                 <form class="col-4 align-items-end" method="get" action="room.php">
-                                    <button type="submit" name="GoToRoomPage" class=" btn btn-secondary" value="<?php echo $room['room_id'];?>">Go to Room Page</button>
-                                    <div class="col-4 align-items-end mt-3 mb-2">
+                                <div class="col-4 align-items-end mt-3 mb-2">
                                     <?php 
                                     //Show reserved button if room is reserved for the dates somebody checks
                                         $bookings = array();
@@ -134,6 +148,7 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                                         }
                                     ?>
                                     </div>
+                                    <button type="submit" name="GoToRoomPage" class=" btn btn-secondary mb-3" value="<?php echo $room['room_id'];?>">Go to Room Page</button>
                                     <input type="hidden" id="checkin" name="checkin" value="<?=$checkin ?>">
                                     <input type="hidden" id="checkout" name="checkout" value="<?=$checkout ?>">
                                 </form>
