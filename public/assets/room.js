@@ -149,3 +149,13 @@ $reviewBtn.addEventListener("click", (e) => {
     $reviewMsg.style.display = "block";
   }
 });
+
+//Favorite
+$favorite = document.querySelector(".favorite");
+$favorite.addEventListener("click", (e) => {
+  if ($favorite.style.color == "") {
+    $favorite.style.color = "red";
+  } else {
+    $favorite.style.color = "";
+  }
+});
