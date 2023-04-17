@@ -23,6 +23,12 @@ class User{
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
+    public function getById($userId){
+        $statement = $this->getPdo()->prepare('SELECT * FROM user WHERE user_id=:user_id');
+        $statement ->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
     public function getUsers(){
         $statement = $this->getPdo()->prepare('SELECT * FROM user');
         $statement->execute();
