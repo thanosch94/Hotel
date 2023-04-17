@@ -54,7 +54,7 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
 <body>
     <?php include('header.php'); ?>
     <main class="row mt-4 mb-4 col-12">
-        <aside class="col-3 my-5 ms-5">
+        <aside class="col-lg-3 col-md-5 col-sm-12 my-5 ms-lg-5 ms-sm-0">
             <section class="container shadow rounded-3">
                 <div class="text-center p-4">
                     <h4>FIND THE PERFECT HOTEL</h4>
@@ -116,8 +116,8 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                 </form>
             </section>
         </aside>
-        <section class="col-8 my-5">
-            <h3 class="bg-secondary p-2 text-light rounded">Search Results</h3>
+        <section class="col-lg-8 col-md-7 col-sm-12 container-fluid my-5">
+            <h3 class="bg-secondary p-2 ms-2 ms-sm-2 ms-lg-0 text-light text-center rounded">Search Results</h3>
                 <?php if(!$roomlist){
                         echo "<h4 class='m-3'> There are no results</h4>";
                         }
@@ -126,17 +126,17 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                     foreach($roomlist as $room){ 
                         ?>
                     <div class="row">
-                        <div class="col-3 mb-5">
+                        <div class="col-12 col-xl-3 col-lg-4 col-md-12 col-sm-4 mb-4 text-xl-start text-lg-start text-md-center text-sm-start text-center">
                             <img style="border-right:3px solid black; padding:10px" src="images/rooms/<?php echo $room['photo_url'] ?>" width="220px" alt="room-1">
                         </div>
-                        <div class="col-9">
+                        <div class="col-12 col-xl-8 col-lg-7 col-md-12 col-sm-6 ms-xl-4 ms-lg-0 ms-md-0 ms-sm-5 text-xl-start text-lg-start text-md-center text-sm-start text-center">
                             <h4><?php echo $room['name'];?><h4>
                             <h5 class="text-secondary"><?php echo $room['city'].', '.$room['address'];?></h5>
                             <p><?php echo $room['description_short']?></p>
                             <div class="row">
-                                <span class="col-8"></span>
-                                <form class="col-4 align-items-end" method="get" action="room.php">
-                                <div class="col-4 align-items-end mt-3 mb-2">
+                                <span class="col-xl-8 col-lg-7 col-md-6 col-sm-6"></span>
+                                <form class="col-xl-4 col-lg-5 col-md-6 col-sm-6 align-items-end px-0" method="get" action="room.php">
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-xl-end text-lg-end text-md-end text-sm-start align-items-end mt-3 mb-2">
                                     <?php 
                                     //Show reserved button if room is reserved for the dates somebody checks
                                         $bookings = array();
@@ -144,11 +144,11 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                                             $bookings[$booked['room_id']] = 1;
                                         }
                                         if($bookings[$room['room_id']]>0){
-                                            echo '<button class="btn btn-warning" >Reserved</button>';
+                                            echo '<button type="button" class="btn btn-warning" >Reserved</button>';
                                         }
                                     ?>
                                     </div>
-                                    <button type="submit" name="GoToRoomPage" class=" btn btn-secondary mb-3" value="<?php echo $room['room_id'];?>">Go to Room Page</button>
+                                    <button type="submit" name="GoToRoomPage" class="btn btn-secondary mb-3" value="<?php echo $room['room_id'];?>">Go to Room Page</button>
                                     <input type="hidden" id="checkin" name="checkin" value="<?=$checkin ?>">
                                     <input type="hidden" id="checkout" name="checkout" value="<?=$checkout ?>">
                                 </form>
@@ -157,9 +157,9 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                         </div>
                     </div>
 
-                    <div class="col-12 row mb-3">
-                        <p class="col-2 ms-4 btn bg-secondary text-light">Per night: <?php echo $room['price'] ?>€</p>
-                        <div class="row col-9 ms-4 text-center">
+                    <div class="col-12 row mb-3 align-items-center">
+                        <p class="col-lg-2 col-sm-3 ms-4 btn bg-secondary text-light">Per night: <?php echo $room['price'] ?>€</p>
+                        <div class="row col-lg-9 col-md-7 col-sm-8 ms-4 text-center align-items-center">
                             <p class="col-5 bg-light text-secondary p-2">Count of guests: <?php echo $room['count_of_guests']?></p>
                             <p class="col-1 bg-light text-secondary p-2">|</p>
                             <p class="col-6 bg-light text-secondary p-2">Type of room: <?php echo $room['type_id']?></p>
