@@ -17,6 +17,9 @@ $user = new User;
 $verify= $user->verify($_REQUEST['email'], $_POST['password']);
 if($verify){
     header('Location: /hotel/public/index.php');
+} else{
+    header('Location: /hotel/public/login.php');
+
 }
 
 //Retrieve user
