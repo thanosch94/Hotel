@@ -61,12 +61,12 @@ $AllFavorites = $favorites ->getFavoritesbyUser($currentUser);
                     <div class="reviews">
                         <?php foreach($AllReviews as $review){
                             $room = $list->getRoom($review['room_id']);
-                            $i++;?>
+                            ?>
                         <div>
                             <div class="col-12 mt-3">
-                                <a class="text-decoration-none"style="color:black" href="room.php?GoToRoomPage=<?=$review['room_id']?>"><h5><?php echo $i.". ". $room['name'];?></h5></a>
+                                <a class="text-decoration-none"style="color:black" href="room.php?GoToRoomPage=<?=$review['room_id']?>"><h5><?php echo (array_search($review, $AllReviews)+1) . ". " . $room['name'];?></h5></a>
                             </div>
-                            <div class="col-12">
+                                <div class="col-12">
                                 <?php for($i=1; $i<=$review['rate']; $i++){
                                     echo '<i class="fa fa-star" style="color:orange"></i>';
                                 }
