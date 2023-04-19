@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'\..\..\boot\boot.php';
+require_once __DIR__.'/../../boot/boot.php';
 
 use Hotel\User;
 
@@ -36,7 +36,7 @@ $userInfo = $user->getByEmail($_REQUEST['email']);
 $token =$user->generateToken($userInfo['user_id']);
 
 //Set cookie
-setcookie('user_id', $token, time()+(30*24*60*60), '/');
+setcookie('user_id', $token, time()+(60*60), '/');
 
 
 ?>

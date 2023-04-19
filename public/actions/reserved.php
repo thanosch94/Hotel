@@ -1,6 +1,6 @@
 <?php 
 
-require_once __DIR__.'\..\..\boot\boot.php';
+require_once __DIR__.'/../../boot/boot.php';
 
 use Hotel\Roomlist;
 use Hotel\Reservation;
