@@ -31,6 +31,10 @@ $AllReviews =$reviews ->getReviews($roomId);
     $average = round(array_sum($values) / count($values));
     }
 
+    session_start();
+    $_SESSION['prev_page'] = $_SERVER['REQUEST_URI'];
+
+
     
 $favorite = new Favorite;
 ?>
@@ -77,11 +81,17 @@ $favorite = new Favorite;
                             
                         ?>
                             </div> | 
-                            <?php if(!$favorite->getFavorites($currentUser, $roomId)){
-                            echo '<a class="text-decoration-none" style="color:white" href="actions/favorite.php?user_id='.$currentUser.'&room_id='.$room['room_id'].'"><i class="favorite fa fa-heart"></i></a>';
-                            }else{
-                                echo '<a class="text-decoration-none" style="color:red" href="actions/favorite.php?user_id='.$currentUser.'&room_id='.$room['room_id'].'"><i class="favorite fa fa-heart"></i></a>';
-                                }?>
+                            <?php   if($currentUser){
+                                        if(!$favorite->getFavorites($currentUser, $roomId)){
+                                            echo '<a class="text-decoration-none" style="color:white" href="actions/favorite.php?user_id='.$currentUser.'&room_id='.$room['room_id'].'"><i class="favorite fa fa-heart"></i></a>';
+                                        }else{
+                                            echo '<a class="text-decoration-none" style="color:red" href="actions/favorite.php?user_id='.$currentUser.'&room_id='.$room['room_id'].'"><i class="favorite fa fa-heart"></i></a>';
+                                        }
+                                    }else{
+                                        echo '<i title="Log in to add to favorites" class="fa fa-heart"></i>';
+                        
+                                }
+                                ?>
                     </div>
                 <div class="text-end">
             <span>Per night: <?php echo $room['price'] ?>€</span>
@@ -113,9 +123,9 @@ $favorite = new Favorite;
                     <label for="checkout" class="col-2"><h4>Check-out Date</h4></label>
                     <div class="col-2 changeDates"></div>
                 </div>
-                <div class="container-fluid row justify-content-around mb-4">
-                    <input class="col-2 checkInDate" min="<?= date('Y-m-d'); //Sets min date to today?>" name="checkin" type="date"> 
-                    <input class="col-2 checkOutDate" min="<?= $checkin;//Min date can't be before checkin date ?>" name="checkout" type="date">
+                <div class="container-fluid row justify-content-around align-items-center mb-4">
+                    <input class="col-2 checkInDate" min="<?= date('Y-m-d'); //Sets min date to today?>" name="checkin" type="date" required> 
+                    <input class="col-2 checkOutDate" min="<?= $checkin;//Min date can't be before checkin date ?>" name="checkout" type="date" required>
                     <input type="hidden" id="roomid" name="roomid" value="<?=$room['room_id'] ?>">
                     <input class="total" type="hidden" id="total" name="total" value="">
                     <?php 
