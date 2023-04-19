@@ -16,9 +16,16 @@ $user = new User;
 //Verify user info
 $verify= $user->verify($_REQUEST['email'], $_POST['password']);
 if($verify){
-    header('Location: /hotel/public/index.php');
-} else{
-    header('Location: /hotel/public/login.php');
+    session_start();
+
+    // Check if the prev_page session variable is set
+    if (isset($_SESSION['prev_page'])) {
+      $prevPage = $_SESSION['prev_page'];
+      header("Location: $prevPage");
+    } else {
+      header("Location: /hotel/public/index.php");
+
+    }
 
 }
 
