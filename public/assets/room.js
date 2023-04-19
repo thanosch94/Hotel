@@ -78,18 +78,6 @@ checkOutDate.addEventListener("input", (e) => {
   totalInput.value = totalPrice;
   total.innerHTML = CalcText(TotalDays, price, totalPrice);
 });
-
-//Activates modal on click of reserve button
-const myModal = document.getElementById("myModal");
-const myInput = document.getElementById("myInput");
-const BtnSubmit = document.getElementById(".btnSubmit");
-
-if (myModal) {
-  myModal.addEventListener("shown.bs.modal", function () {
-    myInput.focus();
-  });
-}
-
 //Review section
 let selected = 0;
 let stars = [];
