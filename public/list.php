@@ -54,7 +54,7 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
 <body>
     <?php include('header.php'); ?>
     <main class="row mt-4 mb-4 col-12">
-        <aside class="col-lg-3 col-md-5 col-sm-12 my-5 ms-lg-5 ms-sm-0">
+        <aside class="col-lg-3 col-md-5 col-sm-12 my-5 ms-lg-5 ms-sm-0 ms-2">
             <section class="container shadow rounded-3">
                 <div class="text-center p-4">
                     <h4>FIND THE PERFECT HOTEL</h4>
@@ -95,7 +95,7 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                     </div>
                     <div class="mt-3">
                         <input 
-                            class="required w-100 rounded p-2 mb-3 text-center text-center";
+                            class="required checkInDate w-100 rounded p-2 mb-3 text-center text-center";
                             id="checkin";
                             type="date"  min="<?= date('Y-m-d');?>";
                             name = "checkin";
@@ -105,7 +105,7 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
                     </div>
                     <div class="mt-3">
                         <input 
-                            class="required w-100 rounded p-2 mb-3 text-center text-center";
+                            class="required checkOutDate w-100 rounded p-2 mb-3 text-center text-center";
                             id="checkout";
                             type="date"  min="<?= date('Y-m-d'); ?>";
                             name = "checkout";
@@ -171,6 +171,8 @@ $reserv =  $reservation ->getReservationsbyDate($checkin, $checkout);
     <footer class="position-fixed w-100 bottom-0">
         <p class="text-center m-0 p-4 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
     </footer>
+    <script src="assets/dates.js"></script>
+    <script src="assets/formErrors.js"></script>
     <script src="assets/form.js"></script>
 </body>
 </html>

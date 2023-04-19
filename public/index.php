@@ -52,7 +52,7 @@ $cities = $list -> getCities();
                 <div class="container justify-content-center row">
                     <div class="text-center col-6">
                         <input 
-                            class="required col-12 rounded py-2 text-center";
+                            class="required checkInDate col-12 rounded py-2 text-center";
                             name="checkin"
                             type="date" min="<?= date('Y-m-d'); ?>"
                             required/>
@@ -61,7 +61,7 @@ $cities = $list -> getCities();
                     
                     <div class="text-center col-6">
                         <input 
-                            class="required col-12 rounded py-2 text-center";
+                            class="required checkOutDate col-12 rounded py-2 text-center";
                             name="checkout";
                             type="date" min="<?= date('Y-m-d'); ?>"
                             required/>
@@ -78,7 +78,8 @@ $cities = $list -> getCities();
     <footer class="z-3">
         <p class="text-center m-0 p-4 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
     </footer>
-    <script src="assets/form.js"></script>
+    <script src="assets/dates.js"></script>
+    <script src="assets/formErrors.js"></script>
 
 </body>
 </html>
