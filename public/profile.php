@@ -45,7 +45,7 @@ $AllFavorites = $favorites ->getFavoritesbyUser($currentUser);
     <?php include('header.php'); ?>
     <main class=" mt-4">
         <div class="row container-fluid" >
-            <aside class="col-3 mt-4 ms-5 rounded-3">
+            <aside class="col-xl-3 col-md-4 col-sm-12 col-12 mt-4 ms-xl-5 ms-sm-0 ms-2 rounded-3">
                 <div class="text-center container shadow p-4">
                     <h3>Favorites</h3>
                     <div class="favorites mb-4">
@@ -80,7 +80,7 @@ $AllFavorites = $favorites ->getFavoritesbyUser($currentUser);
                     </div>
                 </div>
             </aside>
-            <section class="col-7 mt-4 ms-5 mb-5">
+            <section class="col-xl-7 col-md-7 col-sm-12 col-12  mt-4 ms-xl-5 ms-sm-0 ms-2 mb-5">
                 <h4 class="bg-secondary p-2 text-light rounded">My bookings</h4>
                 <?php if(!$reservation){
                             echo "<h4 class='m-3'> There are no reservations</h4>";}
@@ -88,25 +88,25 @@ $AllFavorites = $favorites ->getFavoritesbyUser($currentUser);
                         $room = $list-> getRoom($reserv['room_id']);
                             ?>
                     <div class="row">
-                        <div class="col-3 mb-5">
+                        <div class="col-12 col-xl-4 col-lg-5 col-md-12 col-sm-4 mb-4 text-xl-start text-lg-start text-md-center text-sm-start text-center mb-5">
                             <img style="border-right:3px solid black; padding:10px" src="images/rooms/<?php echo $room['photo_url'] ?>" width="220px" alt="room-1">
                         </div>
-                        <div class="col-9">
+                        <div class="col-12 col-xl-7 col-lg-6 col-md-12 col-sm-6 ms-xl-0 ms-lg-4 ms-md-0 ms-sm-5 text-xl-start text-lg-start text-md-center text-sm-start text-center">
                             <h4><?php echo $room['name'];?><h4>
                             <h5 class="text-secondary"><?php echo $room['city'].', '.$room['address'];?></h5>
                             <p><?php echo $room['description_short']?></p>
-                            <div class="row">
-                                <span class="col-8"></span>
-                                <form class="col-4 align-items-end" method="get" action="room.php">
-                                    <button type="submit" name="GoToRoomPage" class=" btn btn-secondary" value="<?php echo $room['room_id'];?>">Go to Room Page</button>
+                            <div class="row col-12 ms-2">
+                                <span class="col-xl-7 col-lg-1 col-md-5"></span>
+                                <form class="col-xl-5 col-lg-11 col-md-7 col-sm-12 text-xl-end text-lg-end text-md-end text-sm-center text-center px-2 mt-3 mb-2" method="get" action="room.php">
+                                       <button type="submit" name="GoToRoomPage" class=" btn btn-secondary" value="<?php echo $room['room_id'];?>">Go to Room Page</button>
                                 </form>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-12 row mb-3">
-                        <p class="col-2 ms-4 btn bg-secondary text-light">Total: <?=$reserv['total_price']?>€</p>
-                        <div class="row col-9 ms-4 text-center">
+                    <div class=" row mb-3 align-items-center">
+                        <p class="col-xl-2 col-sm-12 col-12 ms-2 btn bg-secondary text-light ">Total: <?=$reserv['total_price']?>€</p>
+                        <div class="row col-xl-9 ms-2 text-center">
                             <p class="col-5 bg-light text-secondary p-2">Check-in Date: <?=$reserv['check_in_date']?></p>
                             <p class="col-1 bg-light text-secondary p-2">|</p>
                             <p class="col-6 bg-light text-secondary p-2">Check-out Date: <?=$reserv['check_out_date']?></p>
