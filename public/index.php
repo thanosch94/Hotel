@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'\..\boot\boot.php';
+require_once __DIR__.'/../boot/boot.php';
 
 use Hotel\Roomlist;
 use Hotel\User;
@@ -21,13 +21,13 @@ $cities = $list -> getCities();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/022912981f.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body  style="background-image: url('images/main.jpg');  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;">
     <?php include('header.php'); ?>
-    <main>
-        <section class="z-1 position-relative">
-            <img class="img-fluid h-auto" src="images/main.jpg" width="100%" >
-        </section>
-        <section class="container rounded-3 col-5 bg-light z-2 pt-5 pb-4 position-absolute top-50 start-50 translate-middle">
+    <main class=" position40 position-relative start-50 translate-middle"> 
+
+        <section class="container rounded-3 col-5 bg-light pt-5 pb-4 ">
             <form action="list.php" method="get">
                 <div class="container justify-content-center row mb-5">
                     <div class="text-center col-6">
@@ -40,13 +40,13 @@ $cities = $list -> getCities();
                         <p class="requiredMsg col-12 text-center" style='color:red'>This field is required</p>  
                     </div>
                     <div class="text-center col-6">
-                        <select class="required col-12 rounded py-2 text-center" name="roomtype" id="room_type" required>
+                        <select class="col-12 rounded py-2 text-center" name="roomtype" id="room_type">
                             <option value="" disabled selected>Room Type</option>
                             <?php foreach($roomtypes as $roomtype){
                             echo'<option value='. $roomtype['type_id'] . '>'. $roomtype['title'] . '</option>';}
                             ?>
                         </select>
-                        <p class="col-12 requiredMsg text-center" style='color:red'>This field is required</p>  
+                        <p class="col-12 requiredMsg text-center"></p>  
                     </div>
                 </div>
                 <div class="container justify-content-center row">
@@ -65,7 +65,7 @@ $cities = $list -> getCities();
                             name="checkout";
                             type="date" min="<?= date('Y-m-d'); ?>"
                             required/>
-                    <p class="requiredMsg col-12 text-center" style='color:red'>This field is required</p> 
+                    <p class="requiredMsg requiredDate col-12 text-center" style='color:red'>This field is required</p> 
                     </div>
                 </div>
                 <div class="text-center">
@@ -75,11 +75,11 @@ $cities = $list -> getCities();
             </form>
         </section>
     </main>
-    <footer class="z-3">
+    <footer class="position-fixed w-100 bottom-0">
         <p class="text-center m-0 p-4 bg-light">© Copyright 2023 Hotels. All rights reserved.</p>
     </footer>
-    <script src="assets/dates.js"></script>
-    <script src="assets/formErrors.js"></script>
 
+    <script src="assets/formErrors.js"></script>
+    <script src="assets/dates.js"></script>
 </body>
 </html>
